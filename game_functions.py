@@ -73,19 +73,25 @@ def fire_bullet(settings, screen, ship, bullets):
 
 def update_screen(settings, screen, stats, sb, ship, aliens, bullets, play_button):
     """Обновляет изображения на экране и отображает новый экран."""
-    screen.fill(settings.bg_color)
+    # Отображение изображения фона.
+    screen.blit(settings.bg_image, (0, 0))
     
+    # Перерисовка всех снарядов позади корабля и пришельцев.
     for bullet in bullets.sprites():
         bullet.draw_bullet()
     ship.blitme()
     aliens.draw(screen)
     
+    # Отображение информации о счете.
     sb.show_score()
 
+    # Отображение кнопки Play, если игра неактивна.
     if not stats.game_active:
         play_button.draw_button()
 
+    # Отображение последнего прорисованного экрана.
     pygame.display.flip()
+
 
 def update_bullets(settings, screen, stats, sb, ship, aliens, bullets):
     """Обновляет позиции снарядов и уничтожает старые снаряды."""
